@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sosyal Medya Paneli</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);color:white;height:100vh;overflow:hidden;display:flex;}
+/* Sidebar */
+.sidebar{
+    width:340px;
+    background:rgba(0,0,0,.85);
+    backdrop-filter:blur(12px);
+    padding:80px 15px;
+    overflow-y:auto;
+    height:100vh;
+}
+.menu-card{background:linear-gradient(135deg,#1f1c2c,#928dab);padding:18px;border-radius:14px;margin-bottom:12px;font-weight:bold;cursor:pointer;transition:.3s;}
+.menu-card:hover{background:linear-gradient(135deg,#fc466b,#3f5efb);}
+.sub-menu{margin-top:10px;display:none;}
+.sub-menu.active{display:block;}
+.sub-item{background:#2b2b2b;padding:12px;border-radius:10px;font-size:14px;margin-bottom:8px;transition:.2s;cursor:pointer;}
+.sub-item:hover{background:#4f46e5;}
+/* Content */
+.content{
+    flex:1;
+    padding:50px;
+    overflow-y:auto;
+}
+.content h2{margin-bottom:15px;}
+.content p{line-height:1.6;margin-bottom:10px;}
+.content ul{margin-left:20px;margin-bottom:15px;}
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+    <!-- Instagram -->
+    <div class="menu-card" onclick="toggleSub(this)">
+        📸 Instagram Hizmetleri
+        <div class="sub-menu">
+            <div class="sub-item" onclick="showContent('Instagram Keşfete Düşme Sistemi')">Instagram Keşfete Düşme Sistemi</div>
+            <div class="sub-item" onclick="showContent('Instagram Takipçi Kazanma Hizmeti')">Instagram Takipçi Kazanma Hizmeti</div>
+            <div class="sub-item" onclick="showContent('Instagram Kitle Kazanma Hizmeti')">Instagram Kitle Kazanma Hizmeti</div>
+            <div class="sub-item" onclick="showContent('Instagram Etiket Sistemi')">Instagram Etiket Sistemi</div>
+        </div>
+    </div>
+
+    <!-- Tiktok -->
+    <div class="menu-card" onclick="toggleSub(this)">
+        🎵 Tiktok Hizmetleri
+        <div class="sub-menu">
+            <div class="sub-item" onclick="showContent('Tiktok Keşfete Düşme Sistemi')">Tiktok Keşfete Düşme Sistemi</div>
+            <div class="sub-item" onclick="showContent('Tiktok Takipçi Kazanma Hizmeti')">Tiktok Takipçi Kazanma Hizmeti</div>
+            <div class="sub-item" onclick="showContent('Tiktok Kitle Kazanma Hizmeti')">Tiktok Kitle Kazanma Hizmeti</div>
+            <div class="sub-item" onclick="showContent('Tiktok Videona Uygun Etiket Sistemi')">Tiktok Videona Uygun Etiket Sistemi</div>
+        </div>
+    </div>
+
+    <!-- Facebook -->
+    <div class="menu-card" onclick="toggleSub(this)">
+        📘 Facebook Hizmetleri
+        <div class="sub-menu">
+            <div class="sub-item" onclick="showContent('Facebook Keşfete Düşme Sistemi')">Facebook Keşfete Düşme Sistemi</div>
+            <div class="sub-item" onclick="showContent('Facebook Takipçi Kazanma Hizmeti')">Facebook Takipçi Kazanma Hizmeti</div>
+            <div class="sub-item" onclick="showContent('Facebook Kitle Kazanma Hizmeti')">Facebook Kitle Kazanma Hizmeti</div>
+            <div class="sub-item" onclick="showContent('Facebook Etiket Sistemi')">Facebook Etiket Sistemi</div>
+        </div>
+    </div>
+
+    <!-- Youtube -->
+    <div class="menu-card" onclick="toggleSub(this)">
+        ▶️ Youtube Hizmetleri
+        <div class="sub-menu">
+            <div class="sub-item" onclick="showContent('Youtube Abone Kazanma Hizmeti')">Youtube Abone Kazanma Hizmeti</div>
+            <div class="sub-item" onclick="showContent('Youtube Videona Uygun Etiket Sistemi')">Youtube Videona Uygun Etiket Sistemi</div>
+            <div class="sub-item" onclick="showContent('Youtube İstediğin Kitleye Ulaşma Hizmeti')">Youtube İstediğin Kitleye Ulaşma Hizmeti</div>
+            <div class="sub-item" onclick="showContent('Youtube Yorum Kazanma Sistemi')">Youtube Yorum Kazanma Sistemi</div>
+        </div>
+    </div>
+
+    <!-- Twitch -->
+    <div class="menu-card" onclick="toggleSub(this)">
+        🎮 Twitch Hizmetleri
+        <div class="sub-menu">
+            <div class="sub-item" onclick="showContent('Twitch Takipçi Kazanma Sistemi')">Twitch Takipçi Kazanma Sistemi</div>
+            <div class="sub-item" onclick="showContent('Twitch Abone Kazanma Sistemi')">Twitch Abone Kazanma Sistemi</div>
+            <div class="sub-item" onclick="showContent('Twitch İzlenme Kazanma Hizmetleri')">Twitch İzlenme Kazanma Hizmetleri</div>
+        </div>
+    </div>
+
+    <!-- Kick -->
+    <div class="menu-card" onclick="toggleSub(this)">
+        ⚡ Kick Hizmetleri
+        <div class="sub-menu">
+            <div class="sub-item" onclick="showContent('Kick Takipçi Kazanma Sistemi')">Kick Takipçi Kazanma Sistemi</div>
+            <div class="sub-item" onclick="showContent('Kick Abone Kazanma Sistemi')">Kick Abone Kazanma Sistemi</div>
+            <div class="sub-item" onclick="showContent('Kick İzlenme Kazanma Hizmetleri')">Kick İzlenme Kazanma Hizmetleri</div>
+        </div>
+    </div>
+
+</div>
+
+<div class="content" id="content">
+    <h2>Hoşgeldiniz</h2>
+    <p>Sol menüden bir hizmet seçerek detaylı rehbere ulaşabilirsiniz.</p>
+</div>
+
+<script>
+function toggleSub(el){
+    const submenu = el.querySelector(".sub-menu");
+    submenu.classList.toggle("active");
+}
+
+// Tüm alt menü içerikleri
+function showContent(title){
+    const content = document.getElementById("content");
+    let html = "";
+
+    switch(title){
+        // Instagram
+        case 'Instagram Keşfete Düşme Sistemi':
+        case 'Instagram Takipçi Kazanma Hizmeti':
+        case 'Instagram Kitle Kazanma Hizmeti':
+        case 'Instagram Etiket Sistemi':
+            html = `<h2>${title}</h2>
+<p>Bu Instagram hizmeti için kapsamlı rehber:</p>
+<p>1. Profil optimizasyonu çok önemli. Profil fotoğrafı, bio, ve bağlantılar doğru şekilde olmalıdır.</p>
+<p>2. İçerik kalitesi yüksek olmalıdır. Fotoğraf ve videolar HD ve estetik olmalıdır.</p>
+<p>3. Trend hashtagleri analiz edin ve içerik ile uyumlu hashtagler kullanın.</p>
+<p>4. Paylaşım saatlerini analiz ederek hedef kitlenizin aktif olduğu saatlerde paylaşım yapın.</p>
+<p>5. Story ve Reels kullanarak görünürlüğünüzü artırın.</p>
+<p>6. Yorum ve DM’leri yanıtlayarak izleyici etkileşimi sağlayın.</p>
+<p>7. İçeriklerinizin paylaşılmasını teşvik edin.</p>
+<p>8. Algoritmayı anlayarak etkileşim oranını artıracak paylaşımlar yapın.</p>
+<p>9. Videolarda dikkat çekici giriş yapın (ilk 3 saniye kritik).</p>
+<p>10. Düzenli paylaşım planı oluşturun, içerik takvimi oluşturun.</p>
+<p>11. İstatistikleri takip edin ve içerik performansını analiz edin.</p>
+<p>12. Rakip analizi yaparak başarılı stratejileri uygulayın.</p>
+<p>13. Renk uyumu ve estetik bütünlük sağlayın.</p>
+<p>14. İşbirlikleri ile kitlenizi genişletin.</p>
+<p>15. Sabırlı ve istikrarlı olun, organik büyümeye odaklanın.</p>`;
+            break;
+
+        // Tiktok
+        case 'Tiktok Keşfete Düşme Sistemi':
+        case 'Tiktok Takipçi Kazanma Hizmeti':
+        case 'Tiktok Kitle Kazanma Hizmeti':
+        case 'Tiktok Videona Uygun Etiket Sistemi':
+            html = `<h2>${title}</h2>
+<p>Tiktok hizmeti için detaylı rehber:</p>
+<p>1. Video içerikleri dikkat çekici ve yaratıcı olmalı.</p>
+<p>2. Müzik ve efekt kullanımı izlenme oranını artırır.</p>
+<p>3. Trend hashtagleri analiz edin ve doğru hashtagler kullanın.</p>
+<p>4. Paylaşım saatlerini optimize edin.</p>
+<p>5. İzleyici ile etkileşim kurun, yorum ve DM’leri yanıtlayın.</p>
+<p>6. Profil görselliğini düzenleyin, bio ve fotoğraf uyumlu olsun.</p>
+<p>7. Düzenli paylaşım yapın, kitlenizi aktif tutun.</p>
+<p>8. İşbirlikleri ile daha geniş kitlelere ulaşın.</p>
+<p>9. Challenge ve trend videolar ile görünürlüğü artırın.</p>
+<p>10. Etkileşimi artırmak için sorular ve call-to-action kullanın.</p>
+<p>11. İstatistikleri takip edin ve başarılı içerikleri çoğaltın.</p>
+<p>12. İçeriklerin paylaşılmasını teşvik edin.</p>
+<p>13. Renk ve tema uyumu ile estetik içerik sağlayın.</p>
+<p>14. Sabırlı olun, organik büyümeyi hedefleyin.</p>
+<p>15. Tiktok algoritmasını anlamak için sürekli gözlem yapın.</p>`;
+            break;
+
+        // Facebook
+        case 'Facebook Keşfete Düşme Sistemi':
+        case 'Facebook Takipçi Kazanma Hizmeti':
+        case 'Facebook Kitle Kazanma Hizmeti':
+        case 'Facebook Etiket Sistemi':
+            html = `<h2>${title}</h2>
+<p>Facebook hizmeti rehberi:</p>
+<p>1. Sayfa ve profil optimizasyonu yapın.</p>
+<p>2. Paylaşımlarda görsel ve video içerik kullanın.</p>
+<p>3. Popüler ve ilgili hashtagleri kullanın.</p>
+<p>4. Paylaşım saatlerini analiz edin ve optimize edin.</p>
+<p>5. Yorum ve mesajlara yanıt verin.</p>
+<p>6. Düzenli içerik paylaşımı ile etkileşimi artırın.</p>
+<p>7. İçeriklerin paylaşılmasını teşvik edin.</p>
+<p>8. İşbirlikleri ile kitleyi genişletin.</p>
+<p>9. Reklam ve sponsorlu içerikler ile erişimi artırın.</p>
+<p>10. İstatistikleri takip edin, başarılı içerikleri çoğaltın.</p>
+<p>11. Grup ve topluluklarda aktif olun.</p>
+<p>12. Etkileşimi artıracak call-to-action ekleyin.</p>
+<p>13. Renk ve tema uyumuna dikkat edin.</p>
+<p>14. Sabırlı ve istikrarlı olun.</p>
+<p>15. Organik büyüme için analiz ve strateji geliştirin.</p>`;
+            break;
+
+        // Youtube
+        case 'Youtube Abone Kazanma Hizmeti':
+        case 'Youtube Videona Uygun Etiket Sistemi':
+        case 'Youtube İstediğin Kitleye Ulaşma Hizmeti':
+        case 'Youtube Yorum Kazanma Sistemi':
+            html = `<h2>${title}</h2>
+<p>Youtube rehberi:</p>
+<p>1. Kanalınızı optimize edin: profil fotoğrafı, banner ve bio.</p>
+<p>2. Video başlıkları dikkat çekici olmalı.</p>
+<p>3. Açıklama kısmında önemli bilgileri ve hashtagleri kullanın.</p>
+<p>4. Thumbnail tasarımı kaliteli ve ilgi çekici olmalı.</p>
+<p>5. Düzenli içerik paylaşımı yapın, abonelerinizi aktif tutun.</p>
+<p>6. İzleyici ile yorum ve DM üzerinden etkileşim kurun.</p>
+<p>7. Videolarınızın başlangıcı dikkat çekici olsun.</p>
+<p>8. Playlist ve kategori kullanımı ile izlenme süresini artırın.</p>
+<p>9. Trendleri takip edin ve içeriklerinizi güncel tutun.</p>
+<p>10. İşbirlikleri ve cross-promosyon ile kitleyi büyütün.</p>
+<p>11. Analitikleri takip edin, izlenme ve etkileşim oranını ölçün.</p>
+<p>12. Call-to-action ekleyerek yorum, beğeni ve paylaşımı teşvik edin.</p>
+<p>13. Video uzunluğu ve tempo izleyiciye uygun olmalı.</p>
+<p>14. Kanalın sosyal medya entegrasyonu ile erişimi artırın.</p>
+<p>15. Sabırlı olun, kaliteli içerikle organik büyümeye odaklanın.</p>`;
+            break;
+
+        // Twitch
+        case 'Twitch Takipçi Kazanma Sistemi':
+        case 'Twitch Abone Kazanma Sistemi':
+        case 'Twitch İzlenme Kazanma Hizmetleri':
+            html = `<h2>${title}</h2>
+<p>Twitch rehberi:</p>
+<p>1. Profilinizi ve kanal bilgilerinizi optimize edin.</p>
+<p>2. Yayın saatlerinizi düzenli yapın.</p>
+<p>3. Etkileşimi artırmak için izleyici ile sohbet edin.</p>
+<p>4. Sosyal medya üzerinden tanıtım yapın.</p>
+<p>5. Trend oyun ve içeriklerle görünürlüğü artırın.</p>
+<p>6. Moderasyon ve chat yönetimine dikkat edin.</p>
+<p>7. Giveaway ve özel etkinlikler ile izleyici çekin.</p>
+<p>8. Kanal grafikleri ve thumbnail’leri profesyonel olsun.</p>
+<p>9. Yayın kalitesi ve ses/görüntü optimizasyonu yapın.</p>
+<p>10. Düzenli ve sabırlı olun.</p>
+<p>11. Analitikleri takip ederek hangi içeriklerin izlenme getirdiğini gözlemleyin.</p>
+<p>12. İşbirlikleri ile kitleyi genişletin.</p>
+<p>13. Reklam ve sosyal medya entegrasyonu ile erişimi artırın.</p>
+<p>14. İzleyici sadakati için özel içerikler üretin.</p>
+<p>15. Hedef kitlenizi iyi analiz edin ve içeriklerinizi optimize edin.</p>`;
+            break;
+
+        // Kick
+        case 'Kick Takipçi Kazanma Sistemi':
+        case 'Kick Abone Kazanma Sistemi':
+        case 'Kick İzlenme Kazanma Hizmetleri':
+            html = `<h2>${title}</h2>
+<p>Kick rehberi:</p>
+<p>1. Profil ve kanal düzenlemesini optimize edin.</p>
+<p>2. Düzenli yayın saatleri oluşturun.</p>
+<p>3. İzleyici ile sürekli etkileşim kurun.</p>
+<p>4. Sosyal medya ile entegre olun.</p>
+<p>5. Trend içerikleri takip edin ve uygulayın.</p>
+<p>6. Grafik ve thumbnail tasarımlarını profesyonel yapın.</p>
+<p>7. Yayın kalitesine dikkat edin.</p>
+<p>8. Analitikleri takip edin ve strateji geliştirin.</p>
+<p>9. İşbirlikleri ile kitleyi büyütün.</p>
+<p>10. Giveaway ve etkinliklerle izleyiciyi çekin.</p>
+<p>11. Chat ve moderasyonu iyi yönetin.</p>
+<p>12. Call-to-action ile etkileşimi artırın.</p>
+<p>13. Sabırlı olun, organik büyümeye odaklanın.</p>
+<p>14. İzleyici sadakati için özel içerikler üretin.</p>
+<p>15. Kitlenizi analiz ederek içerik stratejinizi optimize edin.</p>`;
+            break;
+
+        default:
+            html = `<h2>${title}</h2><p>Bu hizmet için detaylı rehber en kısa zamanda eklenecek.</p>`;
+    }
+
+    content.innerHTML = html;
+}
+</script>
+
+</body>
+</html>
