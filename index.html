@@ -271,4 +271,44 @@ function showContent(title){
 </script>
 
 </body>
+<div id="loginScreen" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#203a43;display:flex;justify-content:center;align-items:center;flex-direction:column;color:white;">
+    <h2>Panel Girişi</h2>
+    <input type="text" id="passwordInput" placeholder="Parolayı Girin" style="padding:10px;border-radius:6px;border:none;margin-bottom:10px;">
+    <button onclick="checkPassword()" style="padding:10px 20px;border:none;border-radius:6px;cursor:pointer;background:#4f46e5;color:white;font-weight:bold;">Giriş Yap</button>
+    <p id="errorMsg" style="color:#ff6b6b;margin-top:10px;display:none;">Parola yanlış veya cihazda kullanılmış!</p>
+</div>
+
+<script>
+const validPasswords = [
+  "AB12-CD34-EF56-GH78",
+  "IJ90-KL12-MN34-OP56",
+  "QR78-ST90-UV12-WX34",
+  "YZ56-AB78-CD90-EF12",
+  "GH34-IJ56-KL78-MN90",
+  "OP12-QR34-ST56-UV78",
+  "WX90-YZ12-AB34-CD56",
+  "EF78-GH90-IJ12-KL34",
+  "MN56-OP78-QR90-ST12",
+  "UV34-WX56-YZ78-AB90"
+];
+
+function checkPassword(){
+    const input = document.getElementById("passwordInput").value;
+    const errorMsg = document.getElementById("errorMsg");
+
+    // localStorage’da kullanılmış mı kontrol
+    let usedPasswords = JSON.parse(localStorage.getItem("usedPasswords") || "[]");
+    if(validPasswords.includes(input) && !usedPasswords.includes(input)){
+        // Parolayı kullanılmış listesine ekle
+        usedPasswords.push(input);
+        localStorage.setItem("usedPasswords", JSON.stringify(usedPasswords));
+
+        document.getElementById("loginScreen").style.display = "none";
+    } else {
+        errorMsg.style.display = "block";
+    }
+}
+</script>
+
+
 </html>
